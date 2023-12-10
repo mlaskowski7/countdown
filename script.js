@@ -14,6 +14,7 @@ let countdownTitle ='';
 let countdownDate = '';
 let countdownValue = 0;
 let countdownActive;
+let savedCountdown;
 
 const secondRate = 1000;
 const minuteRate = secondRate * 60;
@@ -59,11 +60,15 @@ function updateDOM(){
 
 
 function updateCountdown(event){
-
-
     event.preventDefault();
     countdownTitle= event.srcElement[0].value;
     countdownDate= event.srcElement[1].value;
+
+    savedCountdown = {
+        title: countdownTitle,
+        date: countdownDate,
+    };
+    localStorage.setItem('countdown', JSON.stringify(savedCountdown));
 
     if(countdownDate === '' || countdownTitle === ''){
         alert('Enter title and date of the countdown!');
@@ -87,6 +92,20 @@ function reset(){
     countdownDate = '';
 }
 
+function restorePreviousCountdown(){
+    if (localStorage.getItem('countdown')){
+        savedCountdown = JSON.parse(localStorage.getItem('countdown'));
+        countdownTitle = savedCountdown.title;
+        countdownDate = savedCountdown.date;
+        countdownValue = new Date(countdownDate).getTime();
+        updateDOM();
+        inputContainer.hidden = true;
+        countdownElement.hidden = false;
+    }
+}
+
 countdownForm.addEventListener('submit', updateCountdown);
 countdownElementButton.addEventListener('click',reset)
 completeButton.addEventListener('click',reset)
+
+restorePreviousCountdown();
