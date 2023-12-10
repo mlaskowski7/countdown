@@ -67,6 +67,7 @@ h1 {
   text-align: center;
   margin-top: 0;
   margin-bottom: 10px;
+  
 }
 
 /* Form */
@@ -131,6 +132,10 @@ li span {
   text-align: center;
 }
 
+#countdown-title{
+  text-transform: uppercase;
+}
+
 /* Complete */
 .complete {
   position: relative;
@@ -143,6 +148,11 @@ li span {
   font-weight: 800;
   padding: 20px;
   border-radius: 30px;
+  text-transform: uppercase;
+}
+
+#complete-info{
+  text-transform: uppercase;
 }
 
 @keyframes success{
